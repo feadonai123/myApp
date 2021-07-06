@@ -30,7 +30,7 @@ const Routes = ({screenName}) => {
         component={About} 
         options={{
           title: "about", 
-          headerShown: true, 
+          headerShown: false, 
           headerTitleAlign: 'center',
           headerTransparent: false,
         }}

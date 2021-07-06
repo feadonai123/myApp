@@ -3,6 +3,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {View, Text, StyleSheet} from 'react-native';
 import {percentWidthScreen} from './Styles/styles';
+import * as Colors from './Styles/colors';
+import Texts from './Styles/texts';
 
 import Routes from './Routes';
 
@@ -14,8 +16,8 @@ export default App = () => {
       <Tab.Navigator 
       initialRouteName="Home"
       tabBarOptions={{
-        activeTintColor: '#000',
-        inactiveTintColor: '#ccc',
+        activeTintColor: Colors.LightBlue,
+        inactiveTintColor: Colors.DarkBlue,
         showLabel: false,
         style: styles.TabBar,
       }}>
@@ -27,8 +29,8 @@ export default App = () => {
                 </View>
             )} 
             options={{
-                tabBarIcon: ()=>{
-                    return(<View><Text>Home</Text></View>);
+                tabBarIcon: ({ color, size, focused })=>{
+                    return(<Texts.Subtitle style={{color: color}}>Home</Texts.Subtitle>);
                 }
             }}
         />
@@ -40,8 +42,8 @@ export default App = () => {
                 </View>
             )} 
             options={{
-                tabBarIcon: ()=>{
-                    return(<View><Text>About</Text></View>);
+                tabBarIcon: ({ color, size, focused })=>{
+                    return(<Texts.Subtitle style={{color: color}}>About</Texts.Subtitle>);
                 }
             }}
         /> 
@@ -52,7 +54,7 @@ export default App = () => {
 
 const styles = StyleSheet.create({
     TabBar:{
-        backgroundColor: '#ff0',
+        backgroundColor: Colors.Blue,
         //backgroundColor: 'transparent',
         borderTopColor: 'transparent',
         height: percentWidthScreen(15),

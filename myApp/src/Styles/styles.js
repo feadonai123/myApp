@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
+import * as Colors from './colors'
 
 export function percentHeightScreen(percentage) {
   if (percentage < 1) {
@@ -20,7 +21,7 @@ export function percentWidthScreen(percentage) {
 const Styles = StyleSheet.create({
   mainContainer:{
     flex: 1,
-    backgroundColor: '#f69',
+    backgroundColor: Colors.LightBlue,
     paddingHorizontal: percentWidthScreen(5),
     alignItems: 'center',
     justifyContent: 'center',
