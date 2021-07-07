@@ -2,7 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {View, Text, StyleSheet} from 'react-native';
-import {percentWidthScreen} from './Styles/styles';
+import {percentHeightScreen, percentWidthScreen} from './Styles/styles';
 import * as Colors from './Styles/colors';
 import Texts from './Styles/texts';
 

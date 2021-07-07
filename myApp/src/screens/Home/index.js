@@ -1,35 +1,58 @@
-import React from 'react';
-import {View,ScrollView, TouchableOpacity, StyleSheet} from 'react-native';
-import {Styles} from '../../Styles/styles';
+import React, { useState } from 'react';
+import {View,ScrollView, TouchableOpacity, StyleSheet, SafeAreaView, Modal, KeyboardAvoidingView} from 'react-native';
+import {Styles, percentHeightScreen, percentWidthScreen} from '../../Styles/styles';
 import Texts from '../../Styles/texts';
 import * as Colors from '../../Styles/colors';
 
 
-const Home = ({navigation})=>{
+import CreateOrder from '../../Modals/CreateOrder';
+import DefaultButton from '../../Components/DefaultButton';
 
+
+const Home = ({navigation})=>{
+  const [modalCreateVisible, setModalCreateVisible] = useState(false);
   const HandleNavigate = (route)=>{
     navigation.navigate(route)
   }
+
+  const HandleCreateButton = () =>{
+    setModalCreateVisible(!modalCreateVisible);
+  }
   return(
-    <View style={Styles.mainContainer}>
-      <View style={[styles.separator, {marginTop: 20}]}></View>
-      <View style={styles.header}>
-        <Texts.Title>Home</Texts.Title>
-      </View>
-      <View style={{alignItems: 'center', width: '100%', paddingVertical: 20}}>
-        <Texts.SubtitleBold>O que deseja?</Texts.SubtitleBold>
-      </View>
-      <View style={styles.separator}></View>
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={()=>HandleNavigate('about')}>
-          <Texts.ButtonLabel style={{color: Colors.LightBlue}}>VER PEDIDOS</Texts.ButtonLabel>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=>HandleNavigate('about')}>
-          <Texts.ButtonLabel style={{color: Colors.LightBlue}}>CRIAR PEDIDOS</Texts.ButtonLabel>
-        </TouchableOpacity>
-      </View>
-      
-    </View>
+    <KeyboardAvoidingView behavior={'position'} keyboardVerticalOffset={-500} style={{backgroundColor: '#ff0', flex: 1}}>
+      <ScrollView style={{backgroundColor: '#0f0'}}>
+        <View style={[
+          Styles.mainContainer,
+          {height: percentHeightScreen(100)-percentWidthScreen(15)-30+20
+        }]}>
+          <Modal 
+            transparent= {true}
+            animationType='slide'
+            visible={modalCreateVisible}
+            onRequestClose={HandleCreateButton}>
+            <CreateOrder onClose={HandleCreateButton}></CreateOrder>
+          </Modal>
+          <View style={[styles.separator, {marginTop: 20}]}></View>
+          <View style={styles.header}>
+            <Texts.Title>Home</Texts.Title>
+          </View>
+          <View style={{alignItems: 'center', width: '100%', paddingVertical: 20}}>
+            <Texts.SubtitleBold>O que deseja?</Texts.SubtitleBold>
+          </View>
+          <View style={styles.separator}></View>
+          <View style={styles.container}>
+            <DefaultButton
+              text='VER PEDIDOS'
+              fn={()=>HandleNavigate('about')}
+            />
+            <DefaultButton
+              text='CRIAR PEDIDOS'
+              fn={HandleCreateButton}
+            />
+          </View>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   )
 }
 export default Home;
@@ -56,7 +79,7 @@ const styles = StyleSheet.create({
     borderWidth: 4,
   },
   header:{
-    height: '10%',
+    height: percentHeightScreen(10),
     width: '100%',
     alignItems: 'center', 
     justifyContent: 'center',
