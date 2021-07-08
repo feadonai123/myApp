@@ -6,10 +6,13 @@ import Texts from '../../Styles/texts';
 import DefaultButton from '../../Components/DefaultButton';
 import DefaultInput from '../../Components/DefaulImput';
 import DropdownCategories from '../DropdownCategories';
+import User from '../../Services/WebServer/user';
+
 
 const CreateOrder = ({
   onClose,
 })=>{
+  const defaultCategorie = 'games';
   const [nameValue, setNameValue] = useState('');
   const [descriptionValue, setDescriptionValue] = useState('');
   const [categorieValue, setCategorieValue] = useState('games');
@@ -27,8 +30,25 @@ const CreateOrder = ({
       setCategorieValue(value)
     }
   }
-  const handleClickCreate =()=>{
-    alert('Criando...')
+  const handleClickCreate = async()=>{
+    if(nameValue == '' || descriptionValue=='' || categorieValue==''){
+      alert("Preencha todos os campos");
+      return;
+    }
+    const response  = await User.createOrder({
+      name: nameValue,
+      description: descriptionValue,
+      categorie: categorieValue,
+    })
+    if(response){
+      alert("Pedido criado com sucesso");
+      setNameValue('');
+      setCategoriesVisible(defaultCategorie);
+      setDescriptionValue('');
+      onClose();
+    }else{
+      alert("Algo deu errado. Favor tende novamente");
+    }
   }
   return(
     <View style={{marginTop: percentHeightScreen(20)}}>
