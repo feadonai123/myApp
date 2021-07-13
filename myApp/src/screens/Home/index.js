@@ -12,11 +12,14 @@ import DefaultButton from '../../Components/DefaultButton';
 const Home = ({navigation})=>{
   const [modalCreateVisible, setModalCreateVisible] = useState(false);
   const HandleNavigate = (route)=>{
-    navigation.navigate(route)
+    navigation.navigate(route, {itemId: -1})
   }
 
-  const HandleCreateButton = () =>{
+  const HandleCreateButton = ({id= -1}) =>{
     setModalCreateVisible(!modalCreateVisible);
+    if(id!==-1){
+      navigation.navigate("seeOrders", {itemId: id})
+    }
   }
   return(
     <KeyboardAvoidingView behavior={'position'} keyboardVerticalOffset={-500} style={{backgroundColor: '#ff0', flex: 1}}>
@@ -43,7 +46,7 @@ const Home = ({navigation})=>{
           <View style={styles.container}>
             <DefaultButton
               text='VER PEDIDOS'
-              fn={()=>HandleNavigate('about')}
+              fn={()=>HandleNavigate('seeOrders')}
             />
             <DefaultButton
               text='CRIAR PEDIDOS'

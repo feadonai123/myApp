@@ -7,15 +7,15 @@ import DefaultButton from '../../Components/DefaultButton';
 import DefaultInput from '../../Components/DefaulImput';
 import DropdownCategories from '../DropdownCategories';
 import User from '../../Services/WebServer/user';
-
+import OrderPerfil from '../OrderPerfil';
 
 const CreateOrder = ({
   onClose,
 })=>{
-  const defaultCategorie = 'games';
+  const defaultCategorie = '';
   const [nameValue, setNameValue] = useState('');
   const [descriptionValue, setDescriptionValue] = useState('');
-  const [categorieValue, setCategorieValue] = useState('games');
+  const [categorieValue, setCategorieValue] = useState(defaultCategorie);
   const [categoriesVisible, setCategoriesVisible] = useState(false);
 
   const handleOnChangeName =(e)=>{
@@ -40,12 +40,11 @@ const CreateOrder = ({
       description: descriptionValue,
       categorie: categorieValue,
     })
+    setNameValue('');
+    setCategoriesVisible(defaultCategorie);
+    setDescriptionValue('');
     if(response){
-      alert("Pedido criado com sucesso");
-      setNameValue('');
-      setCategoriesVisible(defaultCategorie);
-      setDescriptionValue('');
-      onClose();
+      onClose({id: response.id});
     }else{
       alert("Algo deu errado. Favor tende novamente");
     }
@@ -78,7 +77,6 @@ const CreateOrder = ({
             <Texts.Title>Categorias:</Texts.Title>
             <DefaultButton 
               fn={()=>setCategoriesVisible(!categoriesVisible)}
-              value = {nameValue}
               text={categorieValue}
               backgroundColor={Colors.LightBlue}
               color='#000'
@@ -87,7 +85,6 @@ const CreateOrder = ({
           <View style={{justifyContent:'flex-end', paddingBottom: 40}}>
             <DefaultButton 
               fn={handleClickCreate}
-              value = {nameValue}
               text='Criar'
               backgroundColor={Colors.Blue}
               color='#000'
@@ -95,7 +92,6 @@ const CreateOrder = ({
              <View style={styles.separator}></View>
             <DefaultButton 
               fn={onClose}
-              value = {nameValue}
               text='Cancelar'
               backgroundColor={Colors.Red}
               color='#000'
