@@ -30,6 +30,9 @@ const Orders = ({route})=>{
 
   const handleClickOrder = (id) =>{
     setCurrentOrder(id);
+    openModal();
+  }
+  const openModal = ()=>{
     setOrderPerfilVisible(!orderPerfilVisible);
   }
   return(
@@ -38,8 +41,8 @@ const Orders = ({route})=>{
         transparent= {true}
         animationType='slide'
         visible={orderPerfilVisible}
-        onRequestClose={handleClickOrder}>
-        <OrderPerfil onClose={handleClickOrder} id={currentOrder}></OrderPerfil>
+        onRequestClose={openModal}>
+        <OrderPerfil onClose={openModal} id={currentOrder}></OrderPerfil>
       </Modal>
       <View style={[styles.separator]}></View>
       <ScrollView 

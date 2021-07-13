@@ -6,6 +6,7 @@ import {percentWidthScreen} from '../Styles/styles';
 import Home from '../screens/Home';
 import About from '../screens/About';
 import Orders from '../screens/Orders';
+import Contacts from '../screens/Contacts';
 import * as Colors from '../Styles/colors'
 
 const Stack = createStackNavigator();
@@ -47,13 +48,25 @@ const Routes = ({screenName}) => {
             headerShown: true,
             headerTitleAlign: 'center',
             headerTransparent: false,
-            //headerLeft: ()=>{
-            //  return(
-            //    <TouchableOpacity onPress={()=>navigation.goBack()}>
-            //      <Text>Voltar</Text>
-            //    </TouchableOpacity>
-            //  );
-            //}
+            /*headerLeft: ()=>{
+              return(
+                <TouchableOpacity onPress={()=>navigation.goBack()}>
+                  <Text>Voltar</Text>
+                </TouchableOpacity>
+              );
+            }*/
+          });
+        }}
+      />
+      <Stack.Screen
+        name="countacts" 
+        component={Contacts} 
+        options={({navigation})=>{
+          return({
+            title: 'Contatos',
+            headerShown: false,
+            headerTitleAlign: 'center',
+            headerTransparent: false,
           });
         }}
       />

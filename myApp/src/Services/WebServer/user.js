@@ -44,6 +44,22 @@ class User {
       return [];
     }
   }
+  async getOrderByIds(ids) {
+    try {
+      
+      const data = {
+        ids: ids,
+      }
+      console.log("pegando ids:")
+      console.log(data)
+      const response = await api.post(`/orders/getByIds`, data);
+      console.log(response.data.orders)
+      return response.data.orders;
+    } catch (error) {
+      console.log('Failed to getOrderById', error);
+      return [];
+    }
+  }
 }
 export default new User();
 
