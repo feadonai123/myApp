@@ -8,7 +8,7 @@ import About from '../screens/About';
 import Orders from '../screens/Orders';
 import Contacts from '../screens/Contacts';
 import * as Colors from '../Styles/colors'
-
+import UserPerfil from '../screens/UserPerfil';
 const Stack = createStackNavigator();
 
 const Routes = ({screenName}) => {
@@ -64,6 +64,18 @@ const Routes = ({screenName}) => {
         options={({navigation})=>{
           return({
             title: 'Contatos',
+            headerShown: false,
+            headerTitleAlign: 'center',
+            headerTransparent: false,
+          });
+        }}
+      />
+      <Stack.Screen
+        name="userPerfil" 
+        component={UserPerfil} 
+        options={({navigation})=>{
+          return({
+            title: 'Perfil',
             headerShown: false,
             headerTitleAlign: 'center',
             headerTransparent: false,
